@@ -1,0 +1,3 @@
+d960a87bd31fed1f73d1c91f4f65dfbfe9fdb3b8 - кажется, я теперь создал другой, см. ниже
+
+<script src="https://gist.github.com/jezhische/7f0d14db4640cf0541ce701b78036a1c.js"></script>
