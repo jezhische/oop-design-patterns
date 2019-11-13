@@ -13,7 +13,7 @@ public class ConsoleSoutListener implements EventListener {
 
     @Override
     public void update(EventTypes event, File file) {
-        System.out.printf("%s: From ConsoleSoutListener: event %s occurred for file %s",
+        System.out.printf("%s: From ConsoleSoutListener: event %s occurred for file %s\n",
                 dateFormat.format(new Date()), event, file.getName());
     }
 }
