@@ -6,7 +6,7 @@
     <Properties>
         <!--skipJansi у меня не работает для 2.10.0, а для более низких версий подключен по умолчанию:-->
         <Property name="log4j.skipJansi">false</Property>
-        <Property name="log_path">src\main\java\oop.design.patterns.log</Property>
+        <Property name="log_path">src/main/java/oop/design/patterns</Property>
         <Property name="logger_name">src\main\java\oop\design\patterns</Property>
     </Properties>
     <Filters>
@@ -15,7 +15,7 @@
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
             <!--<PatternLayout pattern="%highlight{%style{%d [%t] %-5level %class.%-8method: %-60msg%n%throwable}{Bright, BG_Yellow}}{FATAL=red, ERROR=red, WARN=magenta, INFO=blue, DEBUG=red, TRACE=black}"/>-->
-            <PatternLayout pattern="%highlight{%d [%t] %-5level %class{-3}.%-8method: %-60msg%n%throwable}{FATAL=red, ERROR=red, WARN=Bright red, INFO=Bright blue, DEBUG=red, TRACE=black}"/>
+            <PatternLayout pattern="%highlight{%d [%t] %-5level %class{-3}.%-8method: %-60msg%n%throwable}{FATAL=red, ERROR=red, WARN=green, INFO=Bright blue, DEBUG=Bright red, TRACE=black}"/>
         </Console>
 
         <!--  .............................................................................................................. -->
@@ -25,8 +25,8 @@
         <!--fileName="...logBar.oop.design.patterns.log" нужен как буфер. Последние логи могут так в нем и остаться, и переписываются в
         соответствующий файл (который может тут же и создаваться по условию OnStartupTriggeringPolicy minSize="1")
         только при следующем запуске приложения (т.е. происходит flush, опорожнение буфера)-->
-        <RollingFile name="BarRollingFile" fileName="${log_path}/logBar.log"
-                     filePattern="${log_path}/logBarLog/logBar_$${date:yyyy-MM-dd}/%d{HH}/logBar-%d{yyyy-MM-dd_HH}-%i.log">
+        <RollingFile name="BarRollingFile" fileName="${log_path}/log/logBar.log"
+                     filePattern="${log_path}/log/logBarLog/logBar_$${date:yyyy-MM-dd}/%d{HH}/logBar-%d{yyyy-MM-dd_HH}-%i.log">
 <!--выражение ${date:yyyy-MM-dd} является lookup, который "inserts external values into the log4j2 configuration"
 (в данном случае - current date), а предшествующий $ - это "escape character, to insert the lookup expression
 into the filePattern attribute"-->
@@ -56,11 +56,22 @@ into the filePattern attribute"-->
             как стек, FIFO. В общем, будет получаться не более 60 файлов в час, и при этом i = {1; 60}-->
             <DefaultRolloverStrategy max="60" />
         </RollingFile>
+        <!--=================================-->
+        <RollingFile name="ObserverRollingFile" fileName="${log_path}/observer/log/logBuffer.log"
+                     filePattern="${log_path}/observer/log/logs/dailyLog_$${date:yyyy-MM-dd}/%d{HH}/log-%d{yyyy-MM-dd_HH}-%i.log">
+            <Policies>
+                <OnStartupTriggeringPolicy minSize="1"/>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="2 KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="60" />
+        </RollingFile>
 <!--  .............................................................................................................. -->
     </Appenders>
 
     <Loggers>
-        <Logger name="${logger_name}" level="trace" additivity="false">
+        <!--логгер верхнего уровня, родитель-->
+        <Logger name="oop.design.patterns" level="trace" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="BarRollingFile"/>
             <Filters>
@@ -70,8 +81,13 @@ into the filePattern attribute"-->
         <!--Это будет его ребенок, и поскольку у него additivity="true" по умолчанию, то аппендеров ему не добавляем -
         он будет пересылать свои сообщения родителю, который будет ими распоряжаться, и дальше пропускать родитель их
         уже не будет, поскольку у родителя additivity="false"-->
-        <Logger name="util.CommonLogger" level="trace">
+        <Logger name="oop.design.patterns.util.CommonLogger" level="trace">
             <!--NB: запись типа <Logger.../> не работает, нужно <Logger...></Logger>-->
+        </Logger>
+        <!--еще ребенок:-->
+        <Logger name="oop.design.patterns.observer" level="trace" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="ObserverRollingFile"/>
         </Logger>
 
         <Root level="warn">

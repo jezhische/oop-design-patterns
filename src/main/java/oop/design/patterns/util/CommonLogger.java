@@ -1,4 +1,4 @@
-package util;
+package oop.design.patterns.util;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class CommonLogger {
-    @Bean
+    @Bean(name = "commonLogger")
     public Logger logger() {
-        return LogManager.getLogger();
+        return LogManager.getLogger(this.getClass());
     }
 }

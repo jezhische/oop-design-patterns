@@ -86,4 +86,8 @@ public class Editor {
     public EventManager getEventManager() {
         return eventManager;
     }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
 }
