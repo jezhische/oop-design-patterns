@@ -1,0 +1,12 @@
+Starting ObserverApp on IvanPC with PID 13880 (C:\STORAGE\programming\PATTERNS\design-patterns\target\classes started by Ivan in C:\STORAGE\programming\PATTERNS\design-patterns)
+Running with Spring Boot v2.0.4.RELEASE, Spring v5.0.8.RELEASE
+No active profile set, falling back to default profiles: default
+Started ObserverApp in 2.115 seconds (JVM running for 4.144)
+*******************@Before("forSpecialLogListenerUpdate") is calling method: void oop.design.patterns.observer.listeners.SpecialLogListener.update(EventTypes,File)
+method void oop.design.patterns.observer.listeners.SpecialLogListener.update(EventTypes,File) argument 0 type: oop.design.patterns.observer.eventType.EventTypes, value: open
+method void oop.design.patterns.observer.listeners.SpecialLogListener.update(EventTypes,File) argument 1 type: java.io.File, value: src\main\java\oop\design\patterns\observer\testFiles\test.txt
+2019-11-19 08:12:20.229 +0200: From SpecialLogListener: event open occurred for file test.txt
+*******************@Before("forSpecialLogListenerUpdate") is calling method: void oop.design.patterns.observer.listeners.SpecialLogListener.update(EventTypes,File)
+method void oop.design.patterns.observer.listeners.SpecialLogListener.update(EventTypes,File) argument 0 type: oop.design.patterns.observer.eventType.EventTypes, value: save
+method void oop.design.patterns.observer.listeners.SpecialLogListener.update(EventTypes,File) argument 1 type: java.io.File, value: src\main\java\oop\design\patterns\observer\testFiles\test.txt
+2019-11-19 08:12:26.734 +0200: From SpecialLogListener: event save occurred for file test.txt

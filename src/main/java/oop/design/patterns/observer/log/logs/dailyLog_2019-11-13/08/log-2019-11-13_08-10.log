@@ -1,0 +1,6 @@
+Starting ObserverApp on IvanPC with PID 6112 (C:\STORAGE\programming\PATTERNS\design-patterns\target\classes started by Ivan in C:\STORAGE\programming\PATTERNS\design-patterns)
+Running with Spring Boot v2.0.4.RELEASE, Spring v5.0.8.RELEASE
+No active profile set, falling back to default profiles: default
+Started ObserverApp in 2.519 seconds (JVM running for 4.716)
+2019-11-13 08:49:59.759 +0200: From SpecialLogListener: event open occurred for file test.txt
+2019-11-13 08:50:04.812 +0200: From SpecialLogListener: event save occurred for file test.txt

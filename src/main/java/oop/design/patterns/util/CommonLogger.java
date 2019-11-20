@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class CommonLogger {
-    @Bean(name = "commonLogger")
+    @Bean(name = "observerCommonLogger")
     public Logger logger() {
         return LogManager.getLogger(this.getClass());
     }
